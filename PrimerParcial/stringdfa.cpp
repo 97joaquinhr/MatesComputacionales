@@ -22,7 +22,7 @@ bool suffixfunction(string pattern, int lengthprefix, int lengthtest, char added
     }
 }
 
-void createtransition(map <pair<int,char>,int> hashtransition,string pattern,int lengthpattern,vector<char> alphabet, int lengthalphabet){
+void createtransition(map <pair<int,char>,int> & hashtransition,string pattern,int lengthpattern,vector<char> alphabet, int lengthalphabet){
     for(int i=0;i<lengthpattern+1;i++){
         for(int j=0;j<lengthalphabet;j++){
             int k=min(i+1,lengthpattern);
@@ -31,9 +31,9 @@ void createtransition(map <pair<int,char>,int> hashtransition,string pattern,int
                 //cout<<k<<endl;
             }
             pair<int,char> transition;
-            transition = {i,alphabet[j]};
-            cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<k<<endl;
+            transition = make_pair(i,alphabet[j]);
             hashtransition.insert({transition,k});
+            //cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<hashtransition[transition]<<endl;
         }
     }
 }
@@ -66,12 +66,14 @@ int main(){
         alphabet.push_back(completealphabet.at(i));
     }
     map <pair<int,char>,int> hashtransition;
-    createtransition(&hashtransition,pattern,lengthpattern,alphabet,lengthalphabet);
-    cout<<"EVERYTHING CORRECT";
+    createtransition(hashtransition,pattern,lengthpattern,alphabet,lengthalphabet);
     for(int i=0;i<lengthpattern+1;i++){
-        cout<<hashtransition[{i,'a'}]<<endl;
-        cout<<hashtransition[{i,'b'}]<<endl;
+        pair<int,char> transition;
+        transition = {i,'a'};
+        cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<hashtransition[transition]<<endl;
+        transition = {i,'b'};
+        cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<hashtransition[transition]<<endl;
     }
-    cout<<stringmatcher(hashtransition,reading,lengthreading,lengthpattern);
+    cout<<"The answer is: "<<stringmatcher(hashtransition,reading,lengthreading,lengthpattern);
     return 0;
 }
