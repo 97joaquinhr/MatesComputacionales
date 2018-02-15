@@ -42,7 +42,6 @@ int stringmatcher(map <pair<int,char>,int> hashtransition, string reading,int le
     int actualstate=0;
     int ans=0;
     for(int i=0;i<lengthtesting;i++){
-        cout<<actualstate<<endl;
         actualstate=hashtransition[{actualstate,reading.at(i)}];
         if(actualstate==lengthpattern){
             ans++;
@@ -67,13 +66,6 @@ int main(){
     }
     map <pair<int,char>,int> hashtransition;
     createtransition(hashtransition,pattern,lengthpattern,alphabet,lengthalphabet);
-    for(int i=0;i<lengthpattern+1;i++){
-        pair<int,char> transition;
-        transition = {i,'a'};
-        cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<hashtransition[transition]<<endl;
-        transition = {i,'b'};
-        cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<hashtransition[transition]<<endl;
-    }
-    cout<<"The answer is: "<<stringmatcher(hashtransition,reading,lengthreading,lengthpattern);
+    cout<<stringmatcher(hashtransition,reading,lengthreading,lengthpattern);
     return 0;
 }
