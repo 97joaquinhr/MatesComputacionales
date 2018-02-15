@@ -67,8 +67,9 @@ int main(){
     }
     map <pair<int,char>,int> hashtransition;
     createtransition(hashtransition,pattern,lengthpattern,alphabet,lengthalphabet);
+    pair<int,char> transition;
     for(int i=0;i<lengthpattern+1;i++){
-        pair<int,char> transition;
+        //pair<int,char> transition; Creo que se puede sacar del for
         transition = {i,'a'};
         cout<<"SIGMA("<<transition.first<<","<<transition.second<<")="<<hashtransition[transition]<<endl;
         transition = {i,'b'};
