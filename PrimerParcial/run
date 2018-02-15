@@ -1,0 +1,3 @@
+#!/bin/sh
+g++ stringdfa.cpp -o program
+./program
