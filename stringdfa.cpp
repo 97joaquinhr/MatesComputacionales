@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool suffixfunction(string pattern, int lengthprefix, int lengthtest, char added,int lengthpattern){
+bool suffixfunction(string pattern, int lengthprefix, int lengthtest, char added){
     string prefix=pattern.substr(0,lengthprefix);
     string testing=pattern.substr(0,lengthtest)+added;
     int lengthtest2=testing.length();
@@ -26,7 +26,7 @@ void createtransition(map <pair<int,char>,int> & hashtransition,string pattern,i
     for(int i=0;i<lengthpattern+1;i++){
         for(int j=0;j<lengthalphabet;j++){
             int k=min(i+1,lengthpattern);
-            while(!suffixfunction(pattern,k,i,alphabet[j],lengthpattern)){
+            while(!suffixfunction(pattern,k,i,alphabet[j])){
                 k--;
                 //cout<<k<<endl;
             }
