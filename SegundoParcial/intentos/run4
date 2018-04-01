@@ -1,0 +1,3 @@
+#!/bin/sh
+g++ test6.cpp -std=c++0x -o test6
+./test6
