@@ -1,21 +1,18 @@
 #include<iostream>
-#include <stdio.h>
 #include<cstring>
 #include<algorithm>
 #include<string>
-#include<cassert>
-#include <sstream>
+#include<sstream>
 #include<iomanip>
 using namespace std;
 #define MAX 100
-#define for(i,a,b) for(i=a;i<b; i++)
+#define for(i,a,b) for(i=a;i<b; i++)//For easier declarations
 
 string gram[MAX][MAX];  //to store entered grammar
-string dpr[MAX];
-int p,np;       //np-> number of productions
+int np;       //np-> number of productions
 
 
-inline string concat( string a, string b)   //concatenates unique non-terminals
+inline string concat(string a, string b)   //concatenates unique non-terminals
 {
     int i;
     string r=a;
@@ -58,7 +55,8 @@ inline string gen_comb(string a, string b)  //creates every combination of varia
 }
 
 int main(){
-    int flagP=1,i=0,j,l,k,flag,quit=0;
+    int flagP=1,i=0,j,l,k,flag;
+    // cout<<"hola mundo";
     string a,str,r,pr,start;
     string matrix[MAX][MAX],st;
     np=0;
@@ -68,7 +66,7 @@ int main(){
             istringstream iss(a);
         }
         flag=1;
-        if(a[0]>='A' && a[0]<='Z' && flagP){
+        if(a[0]>='A' && a[0]<='Z' && flagP){//Reads productions
             for(j,0,MAX){
                 int sp=a.find(" ");
                 if(sp!=-1){
@@ -90,7 +88,7 @@ int main(){
         }
         else{
             if(flagP){
-                start=gram[0][0];
+                start=gram[0][0];//Sets S
                 flagP=0;
             }
             str=a;
@@ -113,7 +111,6 @@ int main(){
                 }
                 matrix[i][i]=r;
             }
-            int ii,kk;
             for(k,1,str.length())       //Assigns values to upper half of the matrix
             {
                 for(j,k,str.length())
@@ -129,27 +126,27 @@ int main(){
             }
 
             // for(i,0,str.length())   //Prints the matrix
-//             {
-//                 k=0;
-//                 l=str.length()-i-1;
-//                 for(j,l,str.length())
-//                 {
-//                     cout<<setw(5)<<matrix[k++][j]<<" ";
-//                 }
-//                 cout<<endl;
-//             }
+            // {
+            //     k=0;
+            //     l=str.length()-i-1;
+            //     for(j,l,str.length())
+            //     {
+            //         cout<<setw(5)<<matrix[k++][j]<<" ";
+            //     }
+            //     cout<<endl;
+            // }
 
             int f=0;
-            for(i,0,start.length())
-                if(matrix[0][str.length()-1].find(start[i]) <= matrix[0][str.length()-1].length())   //Checks if last element of first row contains a Start variable
-                {
+            for(i,0,start.length())            	 
+                if(matrix[0][str.length()-1].find(start[i]) <= matrix[0][str.length()-1].length())  
+                {//Checks if last element of first row contains a Start variable
                     cout<<"Accepted\n";
                 }else{
                     cout<<"Rejected\n";
                 }
             cin>>a;
             if(cin.eof()){
-                return 0;
+                return 0;//condition for break
             }
 
         }
