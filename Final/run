@@ -1,0 +1,3 @@
+#!/bin/sh
+gcc langton.c -o Langton
+./Langton
